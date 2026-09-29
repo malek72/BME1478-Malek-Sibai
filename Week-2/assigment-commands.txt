@@ -1,0 +1,59 @@
+1)
+Can either create the directories using the computer or using the command mkdir
+
+#Looping through every folder that starts with the name "2018" (looping through the number of folders avalaible)
+# Than getting inside that folder and than for every file that contains jpg change theri nnames with the name of the folder they are in
+for i in 2018*
+do
+    cd "$i"
+
+    for k in *.jpg
+    do
+        mv "$k" "$i-$k"
+    done
+
+    cd ..
+done
+
+# Copies all images with .jpg to directory IMAGES
+cp 2018*/*.jpg ../IMAGES
+
+# Copy the eeg the txt and csv files to the folder DATA_ANALYSIS
+for i in 2018*
+do
+    cp "$i"/*.eeg "$i"/*.txt "$i"/*.csv "../DATA_ANALYSIS/$i"
+done
+
+2)
+# Checking if there is any missing txt files
+for i in 2018*
+do
+    ls "$i"/*.txt || echo "Folder $i is missing a txt file"
+done
+
+# Checking if there is any missing txcsvt files
+for i in 2018*
+do
+    ls "$i"/*.csv || echo "Folder $i is missing a csv file"
+done
+
+3)
+# Using mv command to rename the txt files to note txt
+for i in 2018*
+do
+    ls "$i"/*.txt && mv "$i"/*.txt "$i/notes.txt"
+done
+
+#4)
+
+#To check if the folder aare actually in the harddrive from that directory
+
+for i in 2018*
+do
+    ls "$/Users/maleksibai/BME1478/Week-2/assignment-data/$i" || echo "$i is missing"
+done
+
+5)
+
+#Searching within the folders for files that contain the word photo
+grep photo 2018*/* | wc -l
